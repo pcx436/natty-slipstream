@@ -3,7 +3,7 @@
 ### Just handles SIP part (no HTTP magic)
 ### Inspired by NAT Slipstream code (https://samy.pl/slipstream)
 
-from socket import *
+from socket import socket, SOL_SOCKET, SOCK_STREAM, SO_REUSEADDR, AF_INET
 from re import search
 from http.server import ThreadingHTTPServer
 from handler import Handler
