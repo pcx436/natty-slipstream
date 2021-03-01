@@ -13,8 +13,8 @@ WEB_PORT=$3
 PWN_PORT=$(curl -s "http://$REMOTE_IP:$WEB_PORT/")
 LOCAL_IP=${4:-$(ip route get 1 | awk '{print $NF;exit}')}
 
-if ! netstat -lnt | grep -c ':3306'; then
-  echo "Not listening on requested port, exiting..."
+if ! netstat -lnt | grep -cq ':3306'; then
+  echo "Not listening on requested port $PWN_PORT, exiting..."
   exit 2
 fi
 
