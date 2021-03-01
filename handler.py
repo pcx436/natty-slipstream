@@ -14,7 +14,7 @@ class Handler(BaseHTTPRequestHandler):
 		self.end_headers()
 
 	def _html(self):
-		return f'<html><body>{self.port_num}</body></html>'.encode('utf8')
+		return f'{self.port_num}\r\n'.encode('utf8')
 
 	def do_GET(self):
 		self._set_headers()
