@@ -3,6 +3,10 @@
 ### Inspired by NAT Slipstream code (https://samy.pl/slipstream)
 
 from socket import *
+from re import search
+from http.server import ThreadingHTTPServer
+from handler import Handler
+from argparse import ArgumentParser
 
 s = socket(AF_INET,SOCK_STREAM)
 s.bind(("",5060)) 
