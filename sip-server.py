@@ -8,6 +8,7 @@ from re import search
 from http.server import HTTPServer
 from handler import Handler
 from argparse import ArgumentParser
+from threading import Thread
 
 
 def run(listen_port, pwn_port):
@@ -35,7 +36,9 @@ def main(args):
 	# used for finding IPs to match
 	contact_pattern = r'(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)'
 
-	run(args.listen_port, args.pwn_port)
+	http_thread = Thread(target=run, args=(args.listen_port, args.pwn_port))
+	http_thread.start()
+
 	s = socket(AF_INET, SOCK_STREAM)
 	s.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
 	s.bind(("", 5060))
