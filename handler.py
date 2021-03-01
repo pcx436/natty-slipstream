@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-import socketserver
 from http.server import BaseHTTPRequestHandler
-from typing import Tuple
 
 
 class Handler(BaseHTTPRequestHandler):
