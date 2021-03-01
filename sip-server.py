@@ -16,6 +16,7 @@ def run(listen_port, pwn_port):
 	httpd.serve_forever()
 
 
+# Type to ensure port range. Could use argparse's "choices" option, but it looks terrible in the help output
 def port(num):
 	if isinstance(num, int):
 		return 1 <= num <= 65535
