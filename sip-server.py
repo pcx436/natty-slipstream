@@ -26,7 +26,7 @@ def port(num):
 
 def get_args():
 	parser = ArgumentParser(description='NAT Slipstreaming via Python')
-	parser.add_argument('pwn-port', help='Port on the victim to connect to', type=port, default=3306)
+	parser.add_argument('pwn_port', help='Port on the victim to connect to', type=port, default=3306)
 	parser.add_argument('-l', '--listen-port', help='Port for the HTTP server to listen on.', default=8080, type=port)
 
 	return parser.parse_args()
