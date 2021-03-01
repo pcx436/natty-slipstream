@@ -11,7 +11,9 @@ from argparse import ArgumentParser, ArgumentTypeError
 from threading import Thread
 
 
+# serve pwn_port on http server
 def run(listen_port, pwn_port):
+	print('HTTP serving port {} from port {}'.format(pwn_port, listen_port))
 	Handler.port_num = pwn_port
 	httpd = HTTPServer(('', listen_port), Handler)
 	httpd.serve_forever()
@@ -52,6 +54,7 @@ def main(args):
 	s.listen()
 	i = 1
 
+	print('Begin connection acceptance loop')
 	while True:
 		con, client = s.accept()
 		print("Connection from", client)
