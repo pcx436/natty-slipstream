@@ -1,8 +1,11 @@
 #!/bin/bash
 
-echo "Usage: ./natty SIP_SERVER SIP_PORT LOCAL_PORT [LOCAL_IP]"
-echo "       ./natty 10.10.10.10 5060 80"
-echo "NATTY will attempt to figure out local IP, but that can be overwritten with last argument"
+if [ $# -gt 4 ] || [ $# -eq 0 ]; then
+  echo "Usage: ./natty SIP_SERVER SIP_PORT LOCAL_PORT [LOCAL_IP]"
+  echo "       ./natty 10.10.10.10 5060 80"
+  echo "NATTY will attempt to figure out local IP, but that can be overwritten with last argument"
+  exit 1
+fi
 
 REMOTE_IP=$1
 RPORT=${2:-5060}
