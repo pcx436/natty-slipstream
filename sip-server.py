@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 ### Simple SIP Server - natty slipstream
 ### Just handles SIP part (no HTTP magic)
 ### Inspired by NAT Slipstream code (https://samy.pl/slipstream)
