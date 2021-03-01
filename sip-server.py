@@ -5,14 +5,14 @@
 
 from socket import socket, SOL_SOCKET, SOCK_STREAM, SO_REUSEADDR, AF_INET
 from re import search
-from http.server import ThreadingHTTPServer
+from http.server import HTTPServer
 from handler import Handler
 from argparse import ArgumentParser
 
 
 def run(listen_port, pwn_port):
 	Handler.port_num = pwn_port
-	httpd = ThreadingHTTPServer(('', listen_port), Handler)
+	httpd = HTTPServer(('', listen_port), Handler)
 	httpd.serve_forever()
 
 
