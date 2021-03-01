@@ -7,7 +7,7 @@ from socket import socket, SOL_SOCKET, SOCK_STREAM, SO_REUSEADDR, AF_INET
 from re import search
 from http.server import HTTPServer
 from handler import Handler
-from argparse import ArgumentParser
+from argparse import ArgumentParser, ArgumentTypeError
 from threading import Thread
 
 
@@ -19,9 +19,16 @@ def run(listen_port, pwn_port):
 
 # Type to ensure port range. Could use argparse's "choices" option, but it looks terrible in the help output
 def port(num):
-	if isinstance(num, int):
-		return 1 <= num <= 65535
-	return False
+	if isinstance(num, str):
+		try:
+			ret_num = int(num)
+			if 1 <= ret_num <= 65535:
+				return ret_num
+			else:
+				raise ArgumentTypeError('Value {} invalid port. Must be integer within [1, 65535]')
+		except ValueError:
+			raise ArgumentTypeError('Value {} invalid port. Must be integer within [1, 65535]')
+	raise ArgumentTypeError('Value {} invalid port. Must be integer within [1, 65535]')
 
 
 def get_args():
