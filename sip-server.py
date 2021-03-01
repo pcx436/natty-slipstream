@@ -107,7 +107,7 @@ def main(args):
 		con_ip, con_port = search(contact_pattern, contact).group().split(':')
 		s2 = socket(AF_INET, SOCK_STREAM)
 		print(con_ip, con_port)
-		s2.send(b'pwned')
+		s2.connect((con_ip, int(con_port)))
 		s2.send(b'pwned\n')
 		s2.close()
 
